@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  development:
+    image: postgres:15.2-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: oka
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: bugly_dev
+    ports:
+      - 5432:5432
+    networks:
+      - bugly
+
+networks:
+  bugly:
