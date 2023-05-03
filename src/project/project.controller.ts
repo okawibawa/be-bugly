@@ -1,4 +1,4 @@
-import { Controller, Query, Body, Get, Post } from '@nestjs/common';
+import { Controller, Query, Body, Param, Get, Post } from '@nestjs/common';
 
 import { ProjectService } from './project.service';
 import { CreateProjectDto } from './dto';
@@ -6,6 +6,11 @@ import { CreateProjectDto } from './dto';
 @Controller('projects')
 export class ProjectController {
   constructor(private projectService: ProjectService) {}
+
+  @Get(':id')
+  async findProjectById(@Param() findProjectById: { id: string }) {
+    return this.projectService.findProjectById(findProjectById);
+  }
 
   @Get()
   async findProjects(

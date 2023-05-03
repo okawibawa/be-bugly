@@ -6,7 +6,21 @@ import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class ProjectService {
-  constructor(private prismaService: PrismaService) {}
+  constructor(private prismaService: PrismaService) { }
+
+  async findProjectById(findProjectById: { id: string }) {
+    const project = await this.prismaService.project.findUnique({
+      where: {
+        id: +findProjectById.id,
+      },
+    });
+
+    if (!project) {
+      throw new BadRequestException("Project doesn't exist.")
+    }
+
+    return project;
+  }
 
   async findProjects(findProjectQuery: { skip: number; take: number }) {
     try {
