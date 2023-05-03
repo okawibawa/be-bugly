@@ -6,7 +6,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class ProjectService {
-  constructor(private prismaService: PrismaService) { }
+  constructor(private prismaService: PrismaService) {}
 
   async findProjectById(findProjectById: { id: string }) {
     const project = await this.prismaService.project.findUnique({
@@ -16,7 +16,7 @@ export class ProjectService {
     });
 
     if (!project) {
-      throw new BadRequestException("Project doesn't exist.")
+      throw new BadRequestException("Project doesn't exist.");
     }
 
     return project;
@@ -57,7 +57,8 @@ export class ProjectService {
         data: {
           name: createProjectDto.name,
           description: createProjectDto.description,
-          slug: 'SLUG',
+          slug: 'SLUG', // placeholder value, replace with value from the project name
+          leadId: 15 // placeholder value, replace with value fetched from user model 
         },
       });
 
